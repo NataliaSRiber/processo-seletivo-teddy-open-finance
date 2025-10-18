@@ -3,20 +3,29 @@
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:web": "pnpm --filter @teddy/web dev",
+    "typecheck:web": "pnpm --filter @teddy/web typecheck",
+    "lint:web": "pnpm --filter @teddy/web lint",
+    "build:ui": "pnpm --filter @teddy/ui build",
+    "build:web": "pnpm --filter @teddy/web build",
+    "build": "pnpm build:ui && pnpm build:web",
+    "vercel-build": "pnpm lint:web && pnpm typecheck:web && pnpm build:ui && pnpm build:web",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "lint": "pnpm -r run lint",
+    "typecheck": "pnpm -r run typecheck",
+    "ci": "pnpm install --frozen-lockfile && pnpm lint:web && pnpm typecheck:web && pnpm format:check && pnpm build:ui && pnpm build:web && pnpm test --if-present"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.18.3",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": ["apps/*", "packages/*"],
+  "engines": { "node": ">=18.18" },
   "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
     "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.46.1",
     "eslint": "^8.57.1",
