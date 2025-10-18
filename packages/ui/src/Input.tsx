@@ -38,7 +38,7 @@ export const Input = ({
           px-4
           py-4
           border
-          border-gray-300
+          border-brand-lightGray
           rounded-lg
           focus:outline-none
           focus:ring-2
