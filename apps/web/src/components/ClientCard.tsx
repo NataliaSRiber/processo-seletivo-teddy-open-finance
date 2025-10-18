@@ -2,8 +2,15 @@ import EditIcon from "../assets/icons/EditIcon";
 import PlusIcon from "../assets/icons/PlusIcon";
 import TrashIcon from "../assets/icons/TrashIcon";
 
+interface User {
+  id: string;
+  name: string;
+  salary: number;
+  companyValuation: number;
+}
+
 type ClientCardProps = {
-  user: any,
+  user: User,
   onClick?: () => void;
   onViewDetails?: () => void;
   onEdit?: () => void;
