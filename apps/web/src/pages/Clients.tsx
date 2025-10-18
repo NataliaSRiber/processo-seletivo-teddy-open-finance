@@ -1,5 +1,7 @@
 import { Button } from "@teddy/ui";
 import ClientCard from "../components/ClientCard";
+import { useState } from "react";
+import Modal from "../components/Modal";
 
 const mockUser = {
   id: '1',
@@ -9,11 +11,15 @@ const mockUser = {
 }
 
 export default function Clients(){
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const handleViewDetails = (userId: string) => {
     console.log('Ver detalhes do cliente:', userId);
   };
 
   const handleEdit = (userId: string) => {
+    setIsEditModalOpen(true);
+    console.log(isEditModalOpen)
     console.log('Editar cliente:', userId);
   };
 
@@ -32,6 +38,11 @@ export default function Clients(){
             onEdit={() => handleEdit(mockUser.id)}
             onDelete={() => handleDelete(mockUser.id)}
           />
+          <Modal
+            isOpen={isEditModalOpen}
+            onClose={() => setIsEditModalOpen(false)}
+            >
+          </Modal>
         </div>
         <div className="flex justify-center">
           <Button
