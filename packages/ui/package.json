@@ -5,7 +5,7 @@
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-    "exports": {
+  "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
@@ -20,9 +20,12 @@
     "build:watch": "tsup src/index.ts --dts --format cjs,esm --watch",
     "lint": "eslint . --ext .ts,.tsx"
   },
-    "devDependencies": {
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.18",
     "tsup": "^8.3.0",
     "typescript": "^5.6.3"
   },
