@@ -1,5 +1,5 @@
+import { Button } from "@teddy/ui";
 import ClientCard from "../components/ClientCard";
-
 
 const mockUser = {
   id: '1',
@@ -10,7 +10,7 @@ const mockUser = {
 
 export default function Clients(){
   const handleViewDetails = (userId: string) => {
-  console.log('Ver detalhes do cliente:', userId);
+    console.log('Ver detalhes do cliente:', userId);
   };
 
   const handleEdit = (userId: string) => {
@@ -22,15 +22,21 @@ export default function Clients(){
   };
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-center px-4 bg-brand-background ">
-      <div className="w-full max-w-md space-y-8">
-        <p>X clientes foram encontrados</p>
+    <main className="min-h-screen w-full px-4 bg-brand-background py-8 mt-20"> 
+      <div className="max-w-md mx-auto space-y-8"> 
+        <p>1 cliente foi encontrado</p>
         <div className="flex flex-col gap-5">
           <ClientCard 
             user={mockUser}
             onViewDetails={() => handleViewDetails(mockUser.id)}
             onEdit={() => handleEdit(mockUser.id)}
             onDelete={() => handleDelete(mockUser.id)}
+          />
+        </div>
+        <div className="flex justify-center">
+          <Button
+            label="Criar cliente"
+            className="mt-8"
           />
         </div>
       </div>
