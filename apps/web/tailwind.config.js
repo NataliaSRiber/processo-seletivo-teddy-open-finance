@@ -11,6 +11,7 @@ export default {
         brand: {
           primary:'#EC6724',
           lightGray: '#D9D9D9',
+          background: '#F5F5F5'
         },
       },
     },
