@@ -2,6 +2,7 @@ import { Button } from "@teddy/ui";
 import ClientCard from "../components/ClientCard";
 import { useState } from "react";
 import Modal from "../components/Modal";
+import DeleteModal from "../components/DeleteModal";
 
 const mockUser = {
   id: '1',
@@ -12,6 +13,8 @@ const mockUser = {
 
 export default function Clients(){
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [, setClientToDelete] = useState('');
 
   const handleViewDetails = (userId: string) => {
     console.log('Ver detalhes do cliente:', userId);
@@ -19,11 +22,12 @@ export default function Clients(){
 
   const handleEdit = (userId: string) => {
     setIsEditModalOpen(true);
-    console.log(isEditModalOpen)
     console.log('Editar cliente:', userId);
   };
 
   const handleDelete = (userId: string) => {
+    setDeleteModalOpen(true);
+    setClientToDelete(userId)
     console.log('Deletar cliente:', userId);
   };
 
@@ -43,6 +47,10 @@ export default function Clients(){
             onClose={() => setIsEditModalOpen(false)}
             >
           </Modal>
+          <DeleteModal
+            isOpen={deleteModalOpen}
+            onClose={() => setDeleteModalOpen(false)}
+          />
         </div>
         <div className="flex justify-center">
           <Button
