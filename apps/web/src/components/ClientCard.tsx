@@ -1,13 +1,7 @@
+import type { User } from "../types/user";
 import EditIcon from "../assets/icons/EditIcon";
 import PlusIcon from "../assets/icons/PlusIcon";
 import TrashIcon from "../assets/icons/TrashIcon";
-
-interface User {
-  id: string;
-  name: string;
-  salary: number;
-  companyValuation: number;
-}
 
 type ClientCardProps = {
   user: User,
@@ -21,7 +15,7 @@ export default function ClientCard ({ user: {name, salary, companyValuation}, on
    return (
     <div 
       onClick={onClick}
-      className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer
+      className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer bg-white
       sm:max-w-[400px] md:max-w-[521px] lg:max-w-[535px] w-full
       "
     >
