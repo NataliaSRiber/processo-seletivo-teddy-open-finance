@@ -8,6 +8,7 @@ export default function Login() {
 
   const handleLogin = () => {
     if (username.trim()) {
+      localStorage.setItem('username', username);
       navigate('/clients')
     }
   };
