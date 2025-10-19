@@ -15,10 +15,11 @@ type UserListResponse = {
   clients: User[];
   currentPage: number;
   totalPages: number;
+  limit: number;
 };
 
 export const userService = {
-  getAll: async (page: number = 1, limit: number = 10): Promise<ApiResponse<UserListResponse>> => {
+  getAll: async (page: number, limit: number): Promise<ApiResponse<UserListResponse>> => {
     try {
       const response = await api.get('/users', {
         params: {
