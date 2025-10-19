@@ -19,8 +19,8 @@ A aplicação contém:
    - Editar e excluir clientes existentes  
    - Selecionar cliente para ver detalhes  
 
-3. **Tela de detalhes do cliente**  
-   - Exibição completa dos dados do cliente selecionado  
+3. **Tela de clientes selecionados**  
+   - Exibição completa dos dados dos clientes selecionados 
 
 ---
 
