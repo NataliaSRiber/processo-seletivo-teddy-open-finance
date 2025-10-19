@@ -7,14 +7,14 @@ import RemoveIcon from "../assets/icons/RemoveIcon";
 type ClientCardProps = {
   user: User,
   onClick?: () => void;
-  onViewDetails?: () => void;
+  onSelectClient?: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
   isSelected?: boolean;
   onRemoveSelected?: () => void;
 };
 
-export default function ClientCard ({ user: {name, salary, companyValuation}, onClick, onDelete, onEdit, onViewDetails, isSelected = false, onRemoveSelected }: ClientCardProps) {
+export default function ClientCard ({ user: {name, salary, companyValuation}, onClick, onDelete, onEdit, onSelectClient, isSelected = false, onRemoveSelected }: ClientCardProps) {
    return (
     <div 
       onClick={onClick}
@@ -43,7 +43,7 @@ export default function ClientCard ({ user: {name, salary, companyValuation}, on
       >
         <button 
           className="cursor-pointer bg-transparent"
-          onClick={onViewDetails}
+          onClick={onSelectClient}
         >
           <PlusIcon/>
         </button>
