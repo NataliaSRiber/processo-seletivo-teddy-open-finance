@@ -2,6 +2,7 @@ import type { User } from "../types/user";
 import EditIcon from "../assets/icons/EditIcon";
 import PlusIcon from "../assets/icons/PlusIcon";
 import TrashIcon from "../assets/icons/TrashIcon";
+import RemoveIcon from "../assets/icons/RemoveIcon";
 
 type ClientCardProps = {
   user: User,
@@ -9,9 +10,11 @@ type ClientCardProps = {
   onViewDetails?: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
+  isSelected?: boolean;
+  onRemoveSelected?: () => void;
 };
 
-export default function ClientCard ({ user: {name, salary, companyValuation}, onClick, onDelete, onEdit, onViewDetails }: ClientCardProps) {
+export default function ClientCard ({ user: {name, salary, companyValuation}, onClick, onDelete, onEdit, onViewDetails, isSelected = false, onRemoveSelected }: ClientCardProps) {
    return (
     <div 
       onClick={onClick}
@@ -24,7 +27,17 @@ export default function ClientCard ({ user: {name, salary, companyValuation}, on
         <p className="text-black">Salário: R$ {salary.toLocaleString()}</p>
         <p className="text-black">Empresa: R$ {companyValuation.toLocaleString()}</p>
       </div>
-      <div 
+      {isSelected ? (
+        <div>
+          <button
+            className="cursor-pointer bg-transparent"
+            onClick={onRemoveSelected}
+          >
+           <RemoveIcon/>
+          </button>
+        </div>
+      ) : (
+        <div 
         className="flex justify-between items-center w-full mt-5"
         onClick={(e) => e.stopPropagation()}
       >
@@ -47,6 +60,7 @@ export default function ClientCard ({ user: {name, salary, companyValuation}, on
           <TrashIcon/>
         </button>
       </div>
+      )}
     </div>
   )
  
