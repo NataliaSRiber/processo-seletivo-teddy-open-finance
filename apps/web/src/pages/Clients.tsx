@@ -13,6 +13,9 @@ export default function Clients(){
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [users, setUsers] = useState<User[]>([]);
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
   const selectClient = (userId: number) => {
     console.log('Ver detalhes do cliente:', userId);
@@ -67,10 +70,14 @@ export default function Clients(){
     }
   };
 
-  const loadUsers = async () => {
+  const loadUsers = async (currentPage: number = page, limit: number = itemsPerPage) => {
     try {
-      const response = await userService.getAll();
+      const response = await userService.getAll(currentPage, limit);
       const list = response.data.clients;
+      const page = response.data.currentPage;
+      const total = response.data.totalPages;
+      setPage(page);
+      setTotalPages(total);
       setUsers(list);
     } catch (error: any) {
       toast.error(`Erro ao carregar usuários: ${error.message}`);
@@ -81,6 +88,16 @@ export default function Clients(){
     loadUsers();
   }, []);
 
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    loadUsers(newPage, itemsPerPage);
+  };
+
+  const handleItemsPerPageChange = (newItemsPerPage: number) => {
+    setItemsPerPage(newItemsPerPage);
+    setPage(1);
+    loadUsers(1, newItemsPerPage);
+  };
 
   return (
     <main className="min-h-screen w-full px-4 bg-brand-background py-8 mt-20"> 
@@ -102,6 +119,39 @@ export default function Clients(){
               ))
             )
           }
+          {totalPages > 1 && (
+            <div className="flex flex-col gap-4 items-center mt-8">
+              <div className="flex items-center gap-2">
+                <label htmlFor="items-per-page" className="text-sm text-gray-600">
+                  Itens por página:
+                </label>
+                <input
+                  id="items-per-page"
+                  type="number"
+                  min="1"
+                  max="50"
+                  value={itemsPerPage}
+                  onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
+                  className="w-16 px-2 py-1 border border-gray-300 rounded text-center"
+                />
+              </div>
+              <div className="flex gap-4 items-center">
+                <Button 
+                  label="←" 
+                  disabled={page === 1} 
+                  onClick={() => handlePageChange(page - 1)} 
+                />
+                <span className="text-sm">
+                  Página {page} de {totalPages}
+                </span>
+                <Button 
+                  label="→" 
+                  disabled={page === totalPages} 
+                  onClick={() => handlePageChange(page + 1)} 
+                />
+              </div>
+            </div>
+          )}
           <Modal
             isOpen={isModalOpen}
             onClose={() => { setIsModalOpen(false); setEditingUser(null); }}
