@@ -55,7 +55,7 @@ export default function Menu() {
             <NavLink
               to={route}
               className={({ isActive }) => `
-                relative inline-block text-black hover:text-brand-primary
+                relative inline-block text-black hover:text-brand-primary text-base
                 before:absolute before:left-1/2 before:top-7 
                 before:h-[0.5px] before:w-0 before:-translate-x-1/2 
                 before:rounded-full before:bg-brand-primary
@@ -69,16 +69,18 @@ export default function Menu() {
             </NavLink>
           </li>
         ))}
+        <li className="my-7 md:my-0 md:ml-4">
+          <button
+            onClick={handleLogout}
+            className="text-black hover:text-brand-primary cursor-pointer text-base"
+          >
+            Sair
+          </button>
+        </li>
       </ul>
-      <button
-        className="text-black hover:text-brand-primary cursor-pointer"
-        onClick={handleLogout}
-      >
-        Sair
-      </button>
-      <div>
-        Olá, {username}
+      <div className='md:flex hidden'>
+        <p className='text-black text-base font-normal'>Olá,{' '}<span className='font-bold text-black text base capitalize'>{username}!</span></p>  
       </div>
-    </>
+   </>
   )
 }
