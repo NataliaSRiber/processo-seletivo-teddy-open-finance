@@ -97,7 +97,7 @@ export default function Clients(){
   };
 
   return (
-    <main className="min-h-screen w-full px-4 bg-brand-background py-8 mt-20"> 
+    <div className="min-h-screen w-full px-4 bg-brand-background py-8 md:mt-20 mt-30"> 
       <div className="max-w-md mx-auto space-y-8">
         <div className="flex flex-col gap-5">
         <p className="mb-5">{users.length === 1 ? ' 1 cliente foi encontrado:': `${users.length} clientes foram encontrados:` }</p>
@@ -173,6 +173,6 @@ export default function Clients(){
           />
         </div>
       </div>
-    </main>
+    </div>
   )
 }
