@@ -17,7 +17,7 @@ export default function AppRouter() {
             <Clients />
           </AppLayout>
         } />
-        <Route path="/clients/:id" element={
+        <Route path="/selectedClients" element={
           <AppLayout>
             <SelectedClient />
           </AppLayout>
