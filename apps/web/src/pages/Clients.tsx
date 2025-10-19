@@ -7,6 +7,7 @@ import { userService } from "../services/api";
 import type { User } from "../types/user";
 import { toast } from "sonner";
 
+
 export default function Clients(){
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
@@ -16,10 +17,6 @@ export default function Clients(){
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-
-  const selectClient = (userId: number) => {
-    console.log('Ver detalhes do cliente:', userId);
-  };
 
   const handleEdit = (userId: number) => {
     const userToEdit = users.find(user => user.id === userId);
@@ -112,7 +109,6 @@ export default function Clients(){
                 <ClientCard
                   key={user.id}
                   user={user}
-                  onSelectClient={() => user.id && selectClient(user.id)}
                   onEdit={() => user.id && handleEdit(user.id)}
                   onDelete={() => user.id && handleOpenDelete(user.id)}
                 />
