@@ -8,24 +8,49 @@ import type { User } from "../types/user";
 import { toast } from "sonner";
 
 export default function Clients(){
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState<User | null>(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [, setClientToDelete] = useState<number | null>(null);
   const [users, setUsers] = useState<User[]>([]);
 
-  const handleViewDetails = (userId: number) => {
+  const selectClient = (userId: number) => {
     console.log('Ver detalhes do cliente:', userId);
   };
 
   const handleEdit = (userId: number) => {
-    setIsEditModalOpen(true);
-    console.log('Editar cliente:', userId);
+    const userToEdit = users.find(user => user.id === userId);
+    setEditingUser(userToEdit || null);
+    setIsModalOpen(true);
   };
 
   const handleDelete = (userId: number) => {
     setDeleteModalOpen(true);
     setClientToDelete(userId)
     console.log('Deletar cliente:', userId);
+  };
+
+  const handleCreate = () => {
+    setEditingUser(null);
+    setIsModalOpen(true);
+  };
+
+  const handleSave = async (formData: User) => {
+    try {
+      if (editingUser) {
+        console.log(formData)
+        await userService.update(formData);
+        toast.success('Cliente atualizado!');
+      } else {
+        await userService.create(formData);
+        toast.success('Cliente criado!');
+      }
+      await loadUsers();
+      setEditingUser(null);
+      setIsModalOpen(false);
+    } catch (error: any) {
+      toast.error(`Erro: ${error.message}`);
+    }
   };
 
   const loadUsers = async () => {
@@ -56,7 +81,7 @@ export default function Clients(){
                 <ClientCard
                   key={user.id}
                   user={user}
-                  onViewDetails={() => user.id && handleViewDetails(user.id)}
+                  onSelectClient={() => user.id && selectClient(user.id)}
                   onEdit={() => user.id && handleEdit(user.id)}
                   onDelete={() => user.id && handleDelete(user.id)}
                 />
@@ -64,9 +89,11 @@ export default function Clients(){
             )
           }
           <Modal
-            isOpen={isEditModalOpen}
-            onClose={() => setIsEditModalOpen(false)}
-            >
+            isOpen={isModalOpen}
+            onClose={() => { setIsModalOpen(false); setEditingUser(null); }}
+            user={editingUser || undefined}
+            onSave={handleSave}
+          >
           </Modal>
           <DeleteModal
             isOpen={deleteModalOpen}
@@ -77,6 +104,7 @@ export default function Clients(){
           <Button
             label="Criar cliente"
             className="mt-8"
+            onClick={handleCreate}
           />
         </div>
       </div>
