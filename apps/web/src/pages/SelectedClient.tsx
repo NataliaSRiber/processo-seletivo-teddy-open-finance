@@ -17,7 +17,8 @@ export default function SelectedClient(){
                <p>Não há clientes selecionados </p>
             ) : (
               selectedUsers.map((user) =>  (
-                <ClientCard 
+                <ClientCard
+                  key={user.id}
                   user={user}
                 />
               ))
