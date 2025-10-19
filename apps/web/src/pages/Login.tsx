@@ -1,6 +1,17 @@
 import { Button, Input } from "@teddy/ui";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const [username, setUsername] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    if (username.trim()) {
+      navigate('/clients')
+    }
+  };
+
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center px-4">
 
@@ -11,11 +22,13 @@ export default function Login() {
         
         <div className="flex flex-col gap-5">
           <Input
+            value={username}
+            onChange={setUsername}
             label="Digite o seu nome:"
           />
           <Button 
             label="Entrar"
-            onClick={() => console.log('oi')}
+            onClick={handleLogin}
           />
         </div>
       </div>
