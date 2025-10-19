@@ -6,6 +6,7 @@ import DeleteModal from "../components/DeleteModal";
 import { userService, type UserListResponse } from "../services/api";
 import type { User } from "../types/user";
 import { toast } from "sonner";
+import { getErrorMessage } from "../utills/error";
 
 
 export default function Clients(){
@@ -40,10 +41,9 @@ export default function Clients(){
       setUserToDelete(null);
       await loadUsers();
     } catch (error: unknown) {
-      toast.error(`Erro`);
+      toast.error(`Erro: ${getErrorMessage(error)}`);
     }
   };
-
   const handleCreate = () => {
     setEditingUser(null);
     setIsModalOpen(true);
@@ -63,7 +63,7 @@ export default function Clients(){
       setEditingUser(null);
       setIsModalOpen(false);
     } catch (error: unknown) {
-      toast.error(`Erro`);
+      toast.error(`Erro ${getErrorMessage(error)}`);
     }
   };
 
@@ -73,8 +73,8 @@ export default function Clients(){
       setUsers(data.clients);
       setPage(data.currentPage);
       setTotalPages(data.totalPages);
-    } catch (err: unknown) {
-      toast.error(`Erro ao carregar usuários`);
+    } catch (error: unknown) {
+      toast.error(`Erro ao carregar usuários ${getErrorMessage(error)}`);
     }
   }, [page, itemsPerPage]);
 

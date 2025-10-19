@@ -1,5 +1,5 @@
-import { useSelectedClients } from "../context/SelectedClientsContext";
 import ClientCard from "../components/ClientCard";
+import { useSelectedClients } from "../hooks/useSelectedClients";    
 import { Button } from "@teddy/ui";
 
 

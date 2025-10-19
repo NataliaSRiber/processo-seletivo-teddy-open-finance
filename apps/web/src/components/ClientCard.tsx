@@ -3,7 +3,7 @@ import EditIcon from "../assets/icons/EditIcon";
 import PlusIcon from "../assets/icons/PlusIcon";
 import TrashIcon from "../assets/icons/TrashIcon";
 import RemoveIcon from "../assets/icons/RemoveIcon";
-import { useSelectedClients } from "../context/SelectedClientsContext";
+import { useSelectedClients } from "../hooks/useSelectedClients";
 
 type ClientCardProps = {
   user: User,

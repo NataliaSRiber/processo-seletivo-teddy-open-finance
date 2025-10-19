@@ -4,7 +4,8 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import AppRouter from './routes/AppRouter.tsx'
 import { Toaster } from 'sonner';
-import { SelectedClientsProvider } from './context/SelectedClientsContext.tsx'
+import SelectedClientsProvider from './context/SelectedClientsProvider.tsx'
+
 
 
 createRoot(document.getElementById('root')!).render(
