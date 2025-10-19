@@ -11,8 +11,8 @@ export default function Clients(){
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [, setClientToDelete] = useState<number | null>(null);
   const [users, setUsers] = useState<User[]>([]);
+  const [userToDelete, setUserToDelete] = useState<User | null>(null);
 
   const selectClient = (userId: number) => {
     console.log('Ver detalhes do cliente:', userId);
@@ -23,11 +23,25 @@ export default function Clients(){
     setEditingUser(userToEdit || null);
     setIsModalOpen(true);
   };
+  
+  const handleOpenDelete = (userId: number) => {
+    const userToDeleteFound = users.find(user => user.id === userId);
+    if (userToDeleteFound) {
+      setUserToDelete(userToDeleteFound);
+      setDeleteModalOpen(true);
+    }
+  };
 
-  const handleDelete = (userId: number) => {
-    setDeleteModalOpen(true);
-    setClientToDelete(userId)
-    console.log('Deletar cliente:', userId);
+  const handleDelete = async (userId: number) => {
+    try {
+      await userService.delete(userId);
+      toast.success('Cliente deletado!');
+      setDeleteModalOpen(false);
+      setUserToDelete(null);
+      await loadUsers();
+    } catch (error: any) {
+      toast.error(`Erro: ${error.message}`);
+    }
   };
 
   const handleCreate = () => {
@@ -38,9 +52,9 @@ export default function Clients(){
   const handleSave = async (formData: User) => {
     try {
       if (editingUser) {
-        console.log(formData)
         await userService.update(formData);
         toast.success('Cliente atualizado!');
+        await loadUsers();
       } else {
         await userService.create(formData);
         toast.success('Cliente criado!');
@@ -83,7 +97,7 @@ export default function Clients(){
                   user={user}
                   onSelectClient={() => user.id && selectClient(user.id)}
                   onEdit={() => user.id && handleEdit(user.id)}
-                  onDelete={() => user.id && handleDelete(user.id)}
+                  onDelete={() => user.id && handleOpenDelete(user.id)}
                 />
               ))
             )
@@ -97,7 +111,12 @@ export default function Clients(){
           </Modal>
           <DeleteModal
             isOpen={deleteModalOpen}
-            onClose={() => setDeleteModalOpen(false)}
+            onClose={() => {
+            setDeleteModalOpen(false);
+            setUserToDelete(null);
+            }}
+            onDelete={handleDelete}
+            user={userToDelete || undefined}
           />
         </div>
         <div className="flex justify-center">
