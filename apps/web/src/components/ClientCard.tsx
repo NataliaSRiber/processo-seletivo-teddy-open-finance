@@ -3,18 +3,27 @@ import EditIcon from "../assets/icons/EditIcon";
 import PlusIcon from "../assets/icons/PlusIcon";
 import TrashIcon from "../assets/icons/TrashIcon";
 import RemoveIcon from "../assets/icons/RemoveIcon";
+import { useSelectedClients } from "../context/SelectedClientsContext";
 
 type ClientCardProps = {
   user: User,
   onClick?: () => void;
-  onSelectClient?: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
-  isSelected?: boolean;
-  onRemoveSelected?: () => void;
 };
 
-export default function ClientCard ({ user: {name, salary, companyValuation}, onClick, onDelete, onEdit, onSelectClient, isSelected = false, onRemoveSelected }: ClientCardProps) {
+export default function ClientCard ({ user, onClick, onDelete, onEdit }: ClientCardProps) {
+  const { addToSelected, removeFromSelected, isSelectedClient } = useSelectedClients();
+
+  const selectedCard = isSelectedClient(user.id!);
+
+  const togleSelected = () => {
+    if (selectedCard) {
+      removeFromSelected(user.id!)
+    } else {
+      addToSelected(user!)
+    }
+  }
    return (
     <div 
       onClick={onClick}
@@ -22,16 +31,16 @@ export default function ClientCard ({ user: {name, salary, companyValuation}, on
       sm:max-w-[400px] md:max-w-[521px] lg:max-w-[535px] w-full
       "
     >
-      <h3 className="text-xl font-bold text-gray-900 text-center">{name}</h3>
+      <h3 className="text-xl font-bold text-gray-900 text-center">{user.name}</h3>
       <div className="mt-4 space-y-2 justify-center text-center">
-        <p className="text-black">Salário: R$ {salary.toLocaleString()}</p>
-        <p className="text-black">Empresa: R$ {companyValuation.toLocaleString()}</p>
+        <p className="text-black">Salário: R$ {user.salary.toLocaleString()}</p>
+        <p className="text-black">Empresa: R$ {user.companyValuation.toLocaleString()}</p>
       </div>
-      {isSelected ? (
+      {selectedCard ? (
         <div>
           <button
             className="cursor-pointer bg-transparent"
-            onClick={onRemoveSelected}
+            onClick={togleSelected}
           >
            <RemoveIcon/>
           </button>
@@ -43,7 +52,7 @@ export default function ClientCard ({ user: {name, salary, companyValuation}, on
       >
         <button 
           className="cursor-pointer bg-transparent"
-          onClick={onSelectClient}
+          onClick={togleSelected}
         >
           <PlusIcon/>
         </button>
