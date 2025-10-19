@@ -43,7 +43,7 @@ export default function Menu() {
         className={`
           fixed left-0 z-30 w-full bg-white pb-12 pl-9 transition-all duration-500 ease-in-out
           md:static md:z-auto md:flex md:w-auto md:items-center md:pb-0 md:pl-0
-          ${open ? 'top-20 opacity-100' : 'top-[-100%] opacity-0 md:opacity-100'}
+          ${open ? 'top-20 opacity-100 min-h-screen' : 'top-[-100%] opacity-0 md:opacity-100'}
         `}
       >
         {routes.map(({ name, route }, index) => (

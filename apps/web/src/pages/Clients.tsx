@@ -98,23 +98,25 @@ export default function Clients(){
 
   return (
     <div className="min-h-screen w-full px-4 bg-brand-background py-8 md:mt-20 mt-30"> 
-      <div className="max-w-md mx-auto space-y-8">
-        <div className="flex flex-col gap-5">
-        <p className="mb-5">{users.length === 1 ? ' 1 cliente foi encontrado:': `${users.length} clientes foram encontrados:` }</p>
-          {
-            users.length === 0 ? (
-              <p>Não há clientes cadastrados</p>
-            ) : (
-              users.map((user) => (
-                <ClientCard
-                  key={user.id}
-                  user={user}
-                  onEdit={() => user.id && handleEdit(user.id)}
-                  onDelete={() => user.id && handleOpenDelete(user.id)}
-                />
-              ))
-            )
-          }
+      <div className="space-y-8 w-full">
+        <div className="flex flex-col gap-5 w-full">
+          <p className="mb-5 justify-start w-full text-bold text-base">{users.length === 1 ? ' 1 cliente foi encontrado:': `${users.length} clientes foram encontrados:` }</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 min-w-full">
+            {
+              users.length === 0 ? (
+                <p>Não há clientes cadastrados</p>
+              ) : (
+                users.map((user) => (
+                  <ClientCard
+                    key={user.id}
+                    user={user}
+                    onEdit={() => user.id && handleEdit(user.id)}
+                    onDelete={() => user.id && handleOpenDelete(user.id)}
+                  />
+                ))
+              )
+            }
+          </div>
           {totalPages > 1 && (
             <div className="flex flex-col gap-4 items-center mt-8">
               <div className="flex items-center gap-2">
