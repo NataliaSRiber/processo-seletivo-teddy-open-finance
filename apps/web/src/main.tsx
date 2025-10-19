@@ -4,13 +4,16 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import AppRouter from './routes/AppRouter.tsx'
 import { Toaster } from 'sonner';
+import { SelectedClientsProvider } from './context/SelectedClientsContext.tsx'
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <AppRouter/>
-      <Toaster position="top-right" richColors />
-    </BrowserRouter>
+    <SelectedClientsProvider>
+      <BrowserRouter>
+        <AppRouter/>
+        <Toaster position="top-right" richColors />
+      </BrowserRouter>
+    </SelectedClientsProvider>
   </StrictMode>,
 )
