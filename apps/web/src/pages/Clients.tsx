@@ -1,9 +1,9 @@
 import { Button } from "@teddy/ui";
 import ClientCard from "../components/ClientCard";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import DeleteModal from "../components/DeleteModal";
-import { userService } from "../services/api";
+import { userService, type UserListResponse } from "../services/api";
 import type { User } from "../types/user";
 import { toast } from "sonner";
 
@@ -39,8 +39,8 @@ export default function Clients(){
       setDeleteModalOpen(false);
       setUserToDelete(null);
       await loadUsers();
-    } catch (error: any) {
-      toast.error(`Erro: ${error.message}`);
+    } catch (error: unknown) {
+      toast.error(`Erro`);
     }
   };
 
@@ -62,28 +62,25 @@ export default function Clients(){
       await loadUsers();
       setEditingUser(null);
       setIsModalOpen(false);
-    } catch (error: any) {
-      toast.error(`Erro: ${error.message}`);
+    } catch (error: unknown) {
+      toast.error(`Erro`);
     }
   };
 
-  const loadUsers = async (currentPage: number = page, limit: number = itemsPerPage) => {
+  const loadUsers = useCallback(async (currentPage = page, limit = itemsPerPage) => {
     try {
-      const response = await userService.getAll(currentPage, limit);
-      const list = response.data.clients;
-      const page = response.data.currentPage;
-      const total = response.data.totalPages;
-      setPage(page);
-      setTotalPages(total);
-      setUsers(list);
-    } catch (error: any) {
-      toast.error(`Erro ao carregar usuários: ${error.message}`);
+      const data: UserListResponse = await userService.getAll(currentPage, limit);
+      setUsers(data.clients);
+      setPage(data.currentPage);
+      setTotalPages(data.totalPages);
+    } catch (err: unknown) {
+      toast.error(`Erro ao carregar usuários`);
     }
-  };
+  }, [page, itemsPerPage]);
 
   useEffect(() => {
     loadUsers();
-  }, []);
+  }, [loadUsers]);
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
