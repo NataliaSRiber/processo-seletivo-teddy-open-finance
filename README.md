@@ -50,8 +50,6 @@ A aplicação contém:
 
 ```bash
 # 1) Clone o repositório
-git clone https://github.com/seu-usuario/nome-do-projeto.git
-cd nome-do-projeto
 
 # 2) Instale as dependências do monorepo
 pnpm install
