@@ -14,18 +14,14 @@ describe('Página de Clientes', () => {
   it('deve abrir o modal de criar cliente', () => {
     cy.contains('Criar cliente').click();
     
-    // Verifica se o modal abriu - use textos REAIS do seu modal
     cy.contains('Criar cliente').should('be.visible');
-    
-    // Verifica se os inputs existem (sem placeholder específico)
-    cy.get('input').first().should('be.visible'); // Primeiro input
-    cy.get('input[type="number"]').first().should('be.visible'); // Input de número
+    cy.get('input').first().should('be.visible'); 
+    cy.get('input[type="number"]').first().should('be.visible');
   });
 
   it('deve preencher e salvar um novo cliente', () => {
     cy.contains('Criar cliente').click();
     
-    // ADICIONE force: true em todos os type()
     cy.get('input').first().type('Cliente Teste Cypress', { force: true });
     cy.get('input[type="number"]').first().type('5000', { force: true });
     cy.get('input[type="number"]').last().type('100000', { force: true });
