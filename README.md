@@ -1,4 +1,4 @@
-# 🧭 Projeto Frontend — Teste Técnico
+# Projeto Frontend — Teste Técnico Teddy Open Finance
 
 Aplicação frontend desenvolvida em **React + Vite + TypeScript**, com foco em **performance, componentização e boas práticas**.  
 A aplicação consome uma **API REST já existente (fornecida pelo desafio)** e implementa um **Design System próprio** via pacote compartilhado.
@@ -49,4 +49,29 @@ A aplicação contém:
 ### 1. Clone o repositório
 
 ```bash
+# 1) Clone o repositório
+git clone https://github.com/seu-usuario/nome-do-projeto.git
+cd nome-do-projeto
+
+# 2) Instale as dependências do monorepo
+pnpm install
+
+# 3) Crie o .env do app web (ajuste a URL da API se necessário)
+echo 'VITE_API_URL=https://boasorte.teddybackoffice.com.br' > apps/web/.env
+# iniciar somente o app web
+pnpm --filter @teddy/web dev
+# App: http://localhost:5173
+
+# iniciar somente o app web
+pnpm --filter @teddy/web dev
+# App: http://localhost:5173
+# checar lint
+pnpm --filter @teddy/web lint
+
+# build de produção
+pnpm --filter @teddy/web build
+
+# pré-visualizar o build (servidor estático local)
+pnpm --filter @teddy/web preview
+# Preview: http://localhost:4173
 
