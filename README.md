@@ -1,8 +1,6 @@
 # Projeto Frontend — Teste Técnico Teddy Open Finance
 
-Aplicação frontend desenvolvida em **React + Vite + TypeScript**, com foco em **performance, componentização e boas práticas**.  
-A aplicação consome uma **API REST já existente (fornecida pelo desafio)** e implementa um **Design System próprio** via pacote compartilhado.
-
+Sistema moderno de gerenciamento de clientes desenvolvido com React, TypeScript e arquitetura de micro-frontends. Oferece uma experiência completa de CRUD com interface intuitiva, performance otimizada e design responsivo.
 ---
 
 ## 🎯 Escopo Funcional
@@ -17,59 +15,107 @@ A aplicação contém:
    - Visualizar todos os clientes paginados  
    - Cadastrar novos clientes  
    - Editar e excluir clientes existentes  
-   - Selecionar cliente para ver detalhes  
+   - Selecionar cliente 
 
 3. **Tela de clientes selecionados**  
-   - Exibição completa dos dados dos clientes selecionados 
+   - Exibição dos clientes selecionados 
 
 ---
 
-## 🧱 Tecnologias Utilizadas
+## 🧱 Stack Tecnológica
 
-- ⚛️ **React** + **Vite** (última versão)
-- 💙 **TypeScript**
-- 🎨 **TailwindCSS** (mobile-first)
-- 🧩 **Context API** para gerenciamento de estado global
-- 🧱 **Arquitetura de micro-frontends**
-  - `apps/web` → aplicação principal  
-  - `packages/ui` → design system compartilhado (botões, modais, inputs, etc.)
-- 📦 **pnpm** para monorepo e gerenciamento de dependências
-- 🐳 **Docker** para containerização
-- ☁️ **Deploy automático na Vercel**
-- 🧪 **Testing Library + Vitest** (testes unitários)
-- 🧾 **Commits semânticos** (Conventional Commits)
-- ⚙️ **CI/CD** configurado (integração contínua)
+Frontend: React 18 + Vite + TypeScript
+
+Estilização: TailwindCSS
+
+Gerenciamento de Estado: Context API
+
+Build Tool: Vite
+
+Package Manager: pnpm
+
+Testes: Cypress (E2E)
+
+Containerização: Docker + Docker Compose
+
+Deploy: Vercel
+
 
 ---
 
-## 🐳 Executando com Docker
+## 🚀 Executando o projeto
 
-> É necessário ter o **Docker** e **pnpm** instalados.
+É necessário ter o **Docker** e **pnpm** instalados.
 
-### 1. Clone o repositório
+### Opção 1: Docker (Recomendado para teste rápido)
 
 ```bash
-# 1) Clone o repositório
+git clone git@github.com:NataliaSRiber/processo-seletivo-teddy-open-finance.git
+cd processo-seletivo-teddy-open
+docker-compose up
+http://localhost:5173/
+```
 
-# 2) Instale as dependências do monorepo
+### Opção 2: Desenvolvimento local
+
+Pré-requisitos
+Node.js 18+
+pnpm (npm install -g pnpm)
+
+```bash
+git clone git@github.com:NataliaSRiber/processo-seletivo-teddy-open-finance.git
+cd processo-seletivo-teddy-open
 pnpm install
-
-# 3) Crie o .env do app web (ajuste a URL da API se necessário)
-echo 'VITE_API_URL=https://boasorte.teddybackoffice.com.br' > apps/web/.env
-# iniciar somente o app web
 pnpm --filter @teddy/web dev
-# App: http://localhost:5173
+ http://localhost:5173/
+```
+## Comandos de desenvolvimento
 
-# iniciar somente o app web
+```bash
+# Desenvolvimento da aplicação principal
 pnpm --filter @teddy/web dev
-# App: http://localhost:5173
-# checar lint
-pnpm --filter @teddy/web lint
 
-# build de produção
+# Desenvolvimento de todos os pacotes
+pnpm dev
+
+# Build de produção
 pnpm --filter @teddy/web build
 
-# pré-visualizar o build (servidor estático local)
+# Preview do build
 pnpm --filter @teddy/web preview
-# Preview: http://localhost:4173
 
+# Análise de código
+pnpm --filter @teddy/web lint
+```
+
+## 🔬 Testes End-to-End (Cypress)
+
+```bash
+# Interface visual interativa
+pnpm cy:open
+
+# Execução em modo headless
+pnpm cy:run
+
+# Teste específico de clientes
+pnpm cy:run -- --spec "cypress/e2e/clients.cy.ts"
+
+# Executar com browser específico
+pnpm cy:run -- --browser chrome
+```
+
+Configuração do Cypress
+
+```bash
+# Instalação do Cypress (se necessário)
+pnpm add -D cypress
+
+# Instalar binário do Cypress
+npx cypress install
+```
+
+🚀 ## Deploy
+
+A aplicação está configurada para deploy automático na Vercel. Cada push para a branch main gera um deploy automático.
+
+Desenvolvido para Teddy Open Finance
