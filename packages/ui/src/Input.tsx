@@ -31,6 +31,7 @@ export const Input = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={`
+          test-nome-input
           w-full
           sm:max-w-[400px]
           md:max-w-[521px]

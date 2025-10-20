@@ -43,15 +43,15 @@ const handleSave = () => {
       <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-gray-900">
-            {user ? 'Editar Cliente' : 'Criar Cliente'}
+            {user ? 'Editar cliente' : 'Criar cliente'}
           </h2>
           <button onClick={onClose} className="text-2xl">×</button>
         </div>
         
         <div className="flex flex-col gap-4">
-          <Input label="Nome" value={name} onChange={setName} />
-          <Input label="Salário" value={salary} onChange={setSalary} type="number" />
-          <Input label="Valor da Empresa" value={valuation} onChange={setValuation} type="number" />
+          <Input data-testid="nome-input" label="Nome" value={name} onChange={setName} />
+          <Input data-testid="salario-input"  label="Salário" value={salary} onChange={setSalary} type="number" />
+          <Input data-testid="valor-empresa-input" label="Valor da Empresa" value={valuation} onChange={setValuation} type="number" />
         </div>
         
         <Button 

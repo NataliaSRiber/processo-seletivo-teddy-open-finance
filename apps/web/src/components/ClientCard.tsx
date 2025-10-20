@@ -25,7 +25,8 @@ export default function ClientCard ({ user, onClick, onDelete, onEdit }: ClientC
     }
   }
    return (
-    <div 
+    <div
+      data-testid="client-card"
       onClick={onClick}
       className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer bg-white
       sm:max-w-[400px] md:max-w-[521px] lg:max-w-[535px] w-full
@@ -62,7 +63,8 @@ export default function ClientCard ({ user, onClick, onDelete, onEdit }: ClientC
           >
           <EditIcon/> 
         </button>
-        <button 
+        <button
+          data-test="delete-btn"
           className="cursor-pointer bg-transparent"
           onClick={onDelete}
           >
